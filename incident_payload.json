@@ -1,0 +1,11 @@
+{
+    "short_description": "STAGE:: failure ",
+    "description": "demo init failure",
+    "caller_id": "sovan",
+    "category": "Error Message",
+    "cmdb_ci": "Business impect",
+    "subcategory": "Job Failure",
+    "assignment_group": "Service Desk",
+    "impact": "4",
+    "urgency": "4"
+}
