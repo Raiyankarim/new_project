@@ -5,6 +5,7 @@ env:
     PROJECT_NAME: 'snowpipe-reporting-tool'
     LAMBDA_FUNCTION: 'snowpipe-reporting-integration'
     BUILD_DIR: '/tmp/build'
+    APP_PATH: ''
 phases:
   pre_build:
     commands:
@@ -21,9 +22,18 @@ phases:
       - cd '${BUILD_DIR}'
       - zip -r9 ../deployment_package.zip .
       - cd ..
-      - zip -g deployment_package.zip '${BUILD_DIR}/*'
+      - zip -g deployment_package.zip '*.py'
+      - zip -g deployment_package.zip '.env'
+      - zip -g deployment_package.zip '*.yml'
+      - zip -g deployment_package.zip '*.json'
+      - zip -g deployment_package.zip 'integration'
   post_build:
     commands:
       - echo 'Updating lambda Function...'
       - aws lambda update-function-code --function-name '${LAMBDA_FUNCTION}' --zip-file fileb://deployment_package.zip
       - echo 'DONE!!'
+#  artifacts:
+#    files:
+#      - .env
+#      - incident_payload.json
+#      - README.md
