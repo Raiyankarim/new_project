@@ -5,6 +5,6 @@ WORKDIR /usr/src/app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 # Install application
-COPY app.py ./
+COPY . /usr/src/app
 # Run application
-CMD python app.py
+CMD python lambda_function.py
