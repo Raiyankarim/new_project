@@ -4,7 +4,7 @@ from integration.session_authentication import SessionAuthentication
 from integration.utilities import Utility
 
 
-def handler(event=None, context=None):
+def lambda_handler(event=None, context=None):
     with open('incident_payload.json') as file_object:
         incident_payload = json.load(file_object)
 

@@ -1,0 +1,29 @@
+version: 0.2
+run-as: root
+env:
+  variables:
+    PROJECT_NAME: 'snowpipe-reporting-tool'
+    LAMBDA_FUNCTION: 'snowpipe-reporting-integration'
+    BUILD_DIR: '/tmp/build'
+phases:
+  pre_build:
+    commands:
+      - 'mkdir -p ${BUILD_DIR}'
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - echo "Installing dependencies..."
+      - pip install -r requirements.txt -t '${BUILD_DIR}'
+  build:
+    commands:
+      - echo "Zipping deployment package..."
+      - cd '${BUILD_DIR}'
+      - zip -r9 ../deployment_package.zip .
+      - cd ..
+      - zip -g deployment_package.zip '${BUILD_DIR}/*'
+  post_build:
+    commands:
+      - echo "Updating lambda Function..."
+      - aws lambda update-function-code --function-name '${LAMBDA_FUNCTION}' --zip-file fileb://deployment_package.zip
+      - echo "DONE!!"
