@@ -8,5 +8,5 @@ Step 2: install all python external in-build package to project home directory
  > 
 Step 3: archive all folders inside the servicenow_integration folder and upload the zip file
 
-Step 4: run it  
+Step 4: run it okay  
 

@@ -5,6 +5,7 @@ from integration.utilities import Utility
 
 
 def lambda_handler(event=None, context=None):
+    print("hello!!")
     with open('incident_payload.json') as file_object:
         incident_payload = json.load(file_object)
 
